@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.RestaurantInfoActivity">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerRestaurantInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tabLayoutRestaurantInfo" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutRestaurantInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/cranberryRed"
+        app:tabIndicatorGravity="top"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/cranberryRed"
+        app:tabTextColor="@color/black"
+        tools:ignore="MissingConstraints" />
+
+</RelativeLayout>

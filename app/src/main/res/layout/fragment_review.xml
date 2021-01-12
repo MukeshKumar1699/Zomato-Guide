@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/dp_10"
+    tools:context=".fragments.ReviewsFragment">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_back_reviewFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_20"
+            android:src="@drawable/ic_arrow_back" />
+
+        <TextView
+            android:id="@+id/tv_restaurantNameTopBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dp_20"
+            android:text="Restaurant Name"
+            android:textSize="@dimen/sp_20"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/slv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar">
+
+        <RelativeLayout
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_restaurantName_reviewsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="Restaurant Name"
+                android:textSize="@dimen/sp_20" />
+
+            <TextView
+                android:id="@+id/tv_quickBites_reviewsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_restaurantName_reviewsFrag"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="Quick Bites" />
+
+            <TextView
+                android:id="@+id/tv_locality_reviewsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_quickBites_reviewsFrag"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="Locatlity and City" />
+
+            <TextView
+                android:id="@+id/tv_timeStatus_reviewsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_locality_reviewsFrag"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="Open"
+                android:textColor="@color/cranberryRed" />
+
+            <TextView
+                android:id="@+id/tv_timimgs_reviewsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_locality_reviewsFrag"
+                android:layout_toEndOf="@id/tv_timeStatus_reviewsFrag"
+                android:paddingStart="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_5"
+                android:paddingBottom="@dimen/dp_5"
+                android:text="Timings" />
+
+            <TextView
+                android:id="@+id/tv_costfor2_reviewsFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_timimgs_reviewsFrag"
+                android:padding="@dimen/dp_10"
+                android:text="Cost For Two" />
+
+            <ImageView
+                android:id="@+id/iv_call_reviewFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_timimgs_reviewsFrag"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/dp_10"
+                android:padding="@dimen/dp_10"
+                android:src="@drawable/ic_phone" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/tv_costfor2_reviewsFrag"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:background="@android:color/darker_gray" />
+
+
+            <TextView
+                android:id="@+id/review"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/line"
+                android:layout_margin="@dimen/dp_10"
+                android:drawableLeft="@drawable/ic_stars_red"
+                android:drawableRight="@drawable/ic_stars_red"
+                android:drawablePadding="@dimen/dp_5"
+                android:padding="@dimen/dp_5"
+                android:text="@string/reviews"
+                android:textSize="@dimen/sp_20" />
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/review"
+                android:layout_margin="@dimen/dp_10"
+                android:text="Rating" />
+
+            <TextView
+                android:id="@+id/ratingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rating"
+                android:layout_margin="@dimen/dp_10"
+                android:text="Rating Count" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rc_Reviews"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ratingCount" />
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>

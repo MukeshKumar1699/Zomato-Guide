@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.application'
+}
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.mukeshproject.zomatoguide"
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    ext.kotlin_version = '1.4.10'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.hbb20:ccp:2.3.1'
+
+    // Retrofit & OkHttp
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    // This library is used by retrofit internally to convert json-pojo and pojo-json
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    //This library is used to observe the API logs, Http status code and the API response
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
+
+    //Glide
+    compile 'com.github.bumptech.glide:glide:4.8.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+    compile 'com.github.bumptech.glide:annotations:4.8.0'
+
+    //liquid Swipe
+    implementation 'com.cuberto:liquid-swipe:1.0.0'
+
+    implementation 'androidx.core:core-ktx:1.3.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+
+    implementation 'com.google.firebase:firebase-analytics'
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
+    
+    // Also declare the dependency for the Google Play services library and specify its version
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
+
+}

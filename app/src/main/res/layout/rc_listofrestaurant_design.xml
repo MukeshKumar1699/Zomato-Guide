@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cdViewRestDesign"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_15"
+    android:elevation="@dimen/dp_20"
+    android:padding="@dimen/dp_15"
+    app:cardCornerRadius="@dimen/dp_15">
+
+    <RelativeLayout
+        android:id="@+id/rl_restaurantItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_restaurantImageRclist"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_restaurantImageRclist"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/tv_restaurantRatingRcList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/dp_5"
+                android:drawableLeft="@drawable/ic_round_star_green" />
+
+            <TextView
+                android:id="@+id/tv_restaurantNameRclist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_5"
+                android:text="Restaurant Name" />
+
+            <TextView
+                android:id="@+id/tv_restaurantCuisinesRclist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_restaurantCostfor2Rclist"
+                android:layout_margin="@dimen/dp_5"
+                android:layout_marginEnd="@dimen/dp_250"
+                android:text="Restaurant HighLights" />
+
+            <TextView
+                android:id="@+id/tv_restaurantCostfor2Rclist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_restaurantRatingRcList"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="@dimen/dp_5"
+                android:text="Average Cost for two" />
+
+            <TextView
+                android:id="@+id/tv_restaurantTimingRclist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_restaurantCuisinesRclist"
+                android:layout_margin="@dimen/dp_5"
+                android:text="Opens at" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

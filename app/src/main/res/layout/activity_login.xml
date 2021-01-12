@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+
+    <EditText
+        android:id="@+id/et_Email_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_20"
+        android:hint="@string/email" />
+
+    <EditText
+        android:id="@+id/et_Password_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_Email_login"
+        android:layout_margin="@dimen/dp_20"
+        android:hint="@string/passwd"
+        android:inputType="textPassword" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_Password_login"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/dp_20"
+        android:background="@color/cranberryRed"
+        android:padding="@dimen/dp_5"
+        android:text="Login"
+        android:textColor="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/dp_20"
+        android:background="@color/cranberryRed"
+        android:padding="@dimen/dp_5"
+        android:text="SignUp"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

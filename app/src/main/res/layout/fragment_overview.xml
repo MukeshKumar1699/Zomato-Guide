@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.OverviewFragment">
+
+    <ImageView
+        android:id="@+id/iv_restaurantImage_restinfo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_250"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/iv_back_restinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_15"
+        android:src="@drawable/ic_arrow_back" />
+
+    <TextView
+        android:id="@+id/tv_rating_restinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_restaurantImage_restinfo"
+        android:layout_margin="@dimen/dp_15"
+        android:text="@string/rating4.0" />
+
+    <TextView
+        android:id="@+id/tv_restaurantName_restinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_rating_restinfo"
+        android:layout_margin="@dimen/dp_15"
+        android:text="RestaurantName" />
+
+    <TextView
+        android:id="@+id/tv_cuisines_restinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_restaurantName_restinfo"
+        android:layout_margin="@dimen/dp_15"
+        android:text="RestaurantName" />
+
+    <TextView
+        android:id="@+id/tv_timing_restinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_cuisines_restinfo"
+        android:layout_margin="@dimen/dp_15"
+        android:text="RestaurantName" />
+
+</RelativeLayout>

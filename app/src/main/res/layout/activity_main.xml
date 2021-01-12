@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <Button
+        android:id="@+id/btn_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:drawableLeft="@drawable/ic_baseline_location_dark"
+        android:text="Location"
+        android:textColor="@android:color/black" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerMainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/tabLayoutMainActivity"
+        android:layout_below="@id/btn_location" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutMainActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:minHeight="?attr/actionBarSize"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/cranberryRed"
+        app:tabIndicatorGravity="top"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/cranberryRed"
+        app:tabTextColor="@color/black" />
+
+</RelativeLayout>

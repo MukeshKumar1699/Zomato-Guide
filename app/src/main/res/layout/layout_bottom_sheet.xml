@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomSheetContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <TextView
+        android:id="@+id/textSearchLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_20"
+        android:text="@string/searchLocation"
+        android:textColor="@color/black" />
+
+    <SearchView
+        android:id="@+id/sv_searchForLocation"
+        style="@style/SearchViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textSearchLocation"
+        android:layout_margin="@dimen/dp_20"
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/searchforLocation" />
+
+
+    <TextView
+        android:id="@+id/tv_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sv_searchForLocation"
+        android:layout_margin="@dimen/dp_20"
+        android:drawableLeft="@drawable/ic_gps_fixed"
+        android:text="@string/gps"
+        android:textColor="@color/black" />
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "11338530561",
+    "project_id": "zomato-guide",
+    "storage_bucket": "zomato-guide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11338530561:android:d1ede9591221b149fba500",
+        "android_client_info": {
+          "package_name": "com.mukeshproject.zomatoguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11338530561-5j46sav45aptsluhp8euf8e3oevkf9m2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGQyOIygu8NLqj-CIZReRD_o6-ZSwDeF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11338530561-5j46sav45aptsluhp8euf8e3oevkf9m2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
