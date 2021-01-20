@@ -62,20 +62,16 @@ public class ListOfReviews_Rc_ViewHolder extends RecyclerView.ViewHolder {
             emptystarImage3.setVisibility(GONE);
             emptystarImage4.setVisibility(GONE);
             starImage5.setVisibility(GONE);
-
-
         } else if (userReviewsItem.getReview().getRating() == 3) {
             emptystarImage3.setVisibility(GONE);
             emptystarImage4.setVisibility(GONE);
             starImage4.setVisibility(GONE);
             starImage5.setVisibility(GONE);
-
         } else if (userReviewsItem.getReview().getRating() == 2) {
             emptystarImage2.setVisibility(GONE);
             starImage3.setVisibility(GONE);
             starImage4.setVisibility(GONE);
             starImage5.setVisibility(GONE);
-
         } else if (userReviewsItem.getReview().getRating() == 1) {
             starImage5.setVisibility(GONE);
             starImage4.setVisibility(GONE);

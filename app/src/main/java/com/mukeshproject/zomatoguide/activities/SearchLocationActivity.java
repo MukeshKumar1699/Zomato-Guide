@@ -1,7 +1,8 @@
 package com.mukeshproject.zomatoguide.activities;
 
-import android.content.Intent;
+
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import com.mukeshproject.zomatoguide.api.Network;
 import com.mukeshproject.zomatoguide.listeners.ItemClickListenerSearchLocation;
 import com.mukeshproject.zomatoguide.listoflocations.LocationSuggestionsItem;
 import com.mukeshproject.zomatoguide.listoflocations.ResponseListofLocations;
-import com.mukeshproject.zomatoguide.model.SmallDatabase;
+import com.mukeshproject.zomatoguide.sharedpreferences.PreferenceHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +26,9 @@ import retrofit2.Response;
 
 public class SearchLocationActivity extends AppCompatActivity implements ItemClickListenerSearchLocation {
 
-    private final SmallDatabase smallDatabase = new SmallDatabase();
+    private static final String PREF_CITY_NAME_KEY = "PREF_CITY_NAME_KEY";
+    private static final String PREF_ENTITY_ID_KEY = "PREF_ENTITY_ID_KEY";
+
     private String location = "";
     private ResponseListofLocations responseListofLocations;
     private RecyclerView rc_Location;
@@ -42,8 +45,28 @@ public class SearchLocationActivity extends AppCompatActivity implements ItemCli
     }
 
     private void initViews() {
-        iv_back_searchLocation = findViewById(R.id.iv_back_reviewFrag);
+        iv_back_searchLocation = findViewById(R.id.iv_back_searchLocation);
+        iv_back_searchLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         sv_searchForLocation_SearchLocation = findViewById(R.id.sv_searchForLocation_SearchLocation);
+        sv_searchForLocation_SearchLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                fetchServer(newText);
+                return false;
+            }
+        });
+
         rc_Location = findViewById(R.id.rc_Location);
     }
 
@@ -85,14 +108,9 @@ public class SearchLocationActivity extends AppCompatActivity implements ItemCli
     @Override
     public void onItemClick(int position, LocationSuggestionsItem locationSuggestionsItem) {
 
-        Intent intent = new Intent(SearchLocationActivity.this, MainActivity.class);
-
-        smallDatabase.setCityName(locationSuggestionsItem.getName());
-        smallDatabase.setRes_id(locationSuggestionsItem.getId());
-
-        intent.putExtra("res_id", locationSuggestionsItem.getId());
-        intent.putExtra("city", locationSuggestionsItem.getName());
-        startActivity(intent);
+        PreferenceHelper.writeCityNameToPreference(getApplicationContext(), PREF_CITY_NAME_KEY, locationSuggestionsItem.getName());
+        PreferenceHelper.writeResIdToPreference(getApplicationContext(), PREF_ENTITY_ID_KEY, locationSuggestionsItem.getId());
         finish();
     }
+
 }

@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -27,29 +27,31 @@ import com.mukeshproject.zomatoguide.R;
 import com.mukeshproject.zomatoguide.adapter.FragmentAdapterMainActivity;
 import com.mukeshproject.zomatoguide.api.ApiClient;
 import com.mukeshproject.zomatoguide.api.Network;
-import com.mukeshproject.zomatoguide.listeners.LooperPreparedListener;
 import com.mukeshproject.zomatoguide.listoflocations.ResponseListofLocations;
-import com.mukeshproject.zomatoguide.model.BackgroundThread;
-import com.mukeshproject.zomatoguide.model.SmallDatabase;
+import com.mukeshproject.zomatoguide.sharedpreferences.PreferenceHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, LooperPreparedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final String PREF_LATITUDE_KEY = "PREF_LATITUDE_KEY";
+    private static final String PREF_LONGITUDE_KEY = "PREF_LONGITUDE_KEY";
+    private static final String PREF_CITY_NAME_KEY = "PREF_CITY_NAME_KEY";
+    private static final String PREF_ENTITY_ID_KEY = "PREF_ENTITY_ID_KEY";
 
     private static final int LOCATION_PERMISSION_REQ_CODE = 102;
-    private final SmallDatabase smallDatabase = new SmallDatabase();
-    private final Bundle bundle = new Bundle();
     private Button btn_location;
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     private FusedLocationProviderClient client;
-    private double lattitude = 0, longitude = 0;
+    private double latitude = 0, longitude = 0;
     private int entity_id = 0;
     private String q = "";
-    private boolean isLooperPrepared;
-    private BackgroundThread thread;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,19 +59,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         client = LocationServices.getFusedLocationProviderClient(this);
+
         initViewsandListeners();
-        getIntentData();
-//        if(isLooperPrepared) {
-//            thread.addTaskToQueue(new Runnable() {
-//                @Override
-//                public void run() {
-//                    fetchServer();
-//                }
-//            });
-//        }
+        getPrefData();
+
         fetchServer();
         setViewPagerAdapter();
+        upDateUI();
     }
+
+    private void upDateUI() {
+
+        btn_location.setText(q);
+    }
+
 
     private void initViewsandListeners() {
 
@@ -78,54 +81,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mViewPager = findViewById(R.id.viewPagerMainActivity);
         tabLayout = findViewById(R.id.tabLayoutMainActivity);
-
-        thread = new BackgroundThread("dataBase_Thread", this);
-        thread.start();
-
     }
 
+    private void getPrefData() {
 
-    private void getIntentData() {
+        latitude = PreferenceHelper.getLatitudeFromPreference(MainActivity.this, PREF_LATITUDE_KEY);
+        longitude = PreferenceHelper.getLongitudeFromPreference(MainActivity.this, PREF_LONGITUDE_KEY);
+        q = PreferenceHelper.getCityNameFromPreference(MainActivity.this, PREF_CITY_NAME_KEY);
+        entity_id = PreferenceHelper.getEntityIdFromPreference(MainActivity.this, PREF_ENTITY_ID_KEY);
 
-        if (getIntent().getDoubleExtra("lat", 0) != 0 && getIntent().getDoubleExtra("long", 0) != 0) {
-            lattitude = getIntent().getDoubleExtra("lat", 0);
-            longitude = getIntent().getDoubleExtra("long", 0);
-        } else if (getIntent().getStringExtra("city") != null && getIntent().getIntExtra("res_id", 0) != 0) {
-            q = getIntent().getStringExtra("city");
-            btn_location.setText(q);
-            entity_id = getIntent().getIntExtra("entity_id", 0);
-            bundle.putInt("entity_id", entity_id);
-            bundle.putString("City", q);
-        }
     }
 
     private void fetchServer() {
         ApiClient apiClient = Network.getRetrofitInstance().create(ApiClient.class);
-        Call<ResponseListofLocations> call = apiClient.getLocations(q, lattitude, longitude, "f372e6f364b53f71036e6f5662ecfa99");
+        Call<ResponseListofLocations> call = apiClient.getLocations("", latitude, longitude, "f372e6f364b53f71036e6f5662ecfa99");
 
         call.enqueue(new Callback<ResponseListofLocations>() {
             @Override
-            public void onResponse(Call<ResponseListofLocations> call, Response<ResponseListofLocations> response) {
+            public void onResponse(@NotNull Call<ResponseListofLocations> call, @NotNull Response<ResponseListofLocations> response) {
 
                 ResponseListofLocations responseListofLocations = response.body();
-                smallDatabase.setEntity_id(responseListofLocations.getLocationSuggestions().get(0).getId());
+
                 entity_id = responseListofLocations.getLocationSuggestions().get(0).getId();
+                PreferenceHelper.writeEntityIdToPreference(MainActivity.this, PREF_ENTITY_ID_KEY, entity_id);
+
                 q = responseListofLocations.getLocationSuggestions().get(0).getName();
-                btn_location.setText(q);
-                bundle.putInt("entity_id", entity_id);
-                bundle.putString("city", q);
+                PreferenceHelper.writeCityNameToPreference(MainActivity.this, PREF_CITY_NAME_KEY, q);
+
             }
 
             @Override
-            public void onFailure(Call<ResponseListofLocations> call, Throwable t) {
+            public void onFailure(@NotNull Call<ResponseListofLocations> call, @NotNull Throwable t) {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setViewPagerAdapter() {
-
-        FragmentAdapterMainActivity fragmentAdapterMainActivity = new FragmentAdapterMainActivity(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, bundle);
+        FragmentAdapterMainActivity fragmentAdapterMainActivity = new FragmentAdapterMainActivity(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mViewPager.setAdapter(fragmentAdapterMainActivity);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -144,14 +137,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 bottomSheetDialog.setContentView(bottomSheetView);
                 bottomSheetDialog.show();
 
+                ImageView iv_close = bottomSheetView.findViewById(R.id.iv_close);
+                iv_close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
+
                 SearchView sv_searchForLocation = bottomSheetView.findViewById(R.id.sv_searchForLocation);
                 sv_searchForLocation.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String query) {
 
                         if (query != null) {
-                            Intent intent = new Intent(getApplicationContext(), SearchLocationActivity.class);
 
+                            Intent intent = new Intent(getApplicationContext(), SearchLocationActivity.class);
                             intent.putExtra("location", query);
                             startActivity(intent);
                         }
@@ -165,7 +166,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
 
                 TextView tv_gps = bottomSheetView.findViewById(R.id.tv_gps);
-
                 tv_gps.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -173,23 +173,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (!isPermissionGranted) {
                             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQ_CODE);
                         } else {
-                            displayToastMessage("Location Permission already granted");
 
                             client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
                                 @Override
                                 public void onSuccess(Location location) {
 
                                     if (location != null) {
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
-                                        intent.putExtra("lat", location.getLatitude());
-                                        intent.putExtra("long", location.getLongitude());
+                                        latitude = location.getLatitude();
+                                        longitude = location.getLongitude();
 
-                                        smallDatabase.setLattitude(location.getLatitude());
-                                        smallDatabase.setLongitute(location.getLongitude());
-                                        startActivity(intent);
+                                        PreferenceHelper.writeLatitudeToPreference(MainActivity.this, PREF_LATITUDE_KEY, latitude);
+                                        PreferenceHelper.writeLongitudeToPreference(MainActivity.this, PREF_LONGITUDE_KEY, longitude);
+                                        finish();
                                     }
                                 }
+
                             });
                         }
                     }
@@ -197,27 +196,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-
-            case LOCATION_PERMISSION_REQ_CODE:
-
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    displayToastMessage("Location permission granted");
-                } else {
-                    displayToastMessage("Location permission denied");
-                }
-                break;
-        }
-    }
-
-    private void displayToastMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onLooperPrepared() {
-        isLooperPrepared = true;
-    }
 }

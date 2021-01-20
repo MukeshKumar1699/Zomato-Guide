@@ -5,17 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
-import com.mukeshproject.zomatoguide.LoginOptionActivity;
 import com.mukeshproject.zomatoguide.R;
+import com.mukeshproject.zomatoguide.activities.LoginOptionActivity;
 
 
 public class ProfileFragment extends Fragment {
@@ -24,6 +26,7 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private TextView tv_Logout, tv_userName, tv_emailId;
+    private ImageView iv_accProfilePic;
     private String mParam1;
     private String mParam2;
 
@@ -69,10 +72,12 @@ public class ProfileFragment extends Fragment {
         GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(getContext());
         tv_userName = view.findViewById(R.id.tv_userName);
         tv_emailId = view.findViewById(R.id.tv_emailId);
+        iv_accProfilePic = view.findViewById(R.id.iv_accProfilePic);
 
         if (signInAccount != null) {
             tv_userName.setText(signInAccount.getDisplayName());
             tv_emailId.setText(signInAccount.getEmail());
+            Glide.with(getContext()).load(signInAccount.getPhotoUrl()).into(iv_accProfilePic);
         }
 
         tv_Logout = view.findViewById(R.id.tv_Logout);

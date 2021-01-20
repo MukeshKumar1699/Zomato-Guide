@@ -1,7 +1,5 @@
 package com.mukeshproject.zomatoguide.adapter;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,12 +12,10 @@ import com.mukeshproject.zomatoguide.fragments.ProfileFragment;
 
 public class FragmentAdapterMainActivity extends FragmentStatePagerAdapter {
 
-    private final Bundle bundle;
-
-    public FragmentAdapterMainActivity(@NonNull FragmentManager fm, int behavior, Bundle bundle) {
+    public FragmentAdapterMainActivity(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
-        this.bundle = bundle;
     }
+
 
     @NonNull
     @Override
@@ -28,14 +24,17 @@ public class FragmentAdapterMainActivity extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-
-                return OrderFragment.newInstance("", "");
+                OrderFragment orderFragment = new OrderFragment();
+                return orderFragment;
             case 1:
-                return GoOutFragment.newInstance("", "");
+
+                GoOutFragment goOutFragment = new GoOutFragment();
+                return goOutFragment;
             case 2:
-                return ProfileFragment.newInstance("", "");
+
+                return new ProfileFragment();
         }
-        return OrderFragment.newInstance("This is First Fragment", "");
+        return null;
     }
 
     @Override
@@ -46,7 +45,7 @@ public class FragmentAdapterMainActivity extends FragmentStatePagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        String tabTitle = "";
+        String tabTitle;
 
         switch (position) {
             case 0:
@@ -64,4 +63,6 @@ public class FragmentAdapterMainActivity extends FragmentStatePagerAdapter {
         }
         return tabTitle;
     }
+
+
 }

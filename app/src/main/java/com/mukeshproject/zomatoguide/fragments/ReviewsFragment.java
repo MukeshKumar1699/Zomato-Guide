@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ import com.mukeshproject.zomatoguide.listeners.LooperPreparedListener;
 import com.mukeshproject.zomatoguide.listofreviews.ResponseReviews;
 import com.mukeshproject.zomatoguide.model.BackgroundThread;
 import com.mukeshproject.zomatoguide.restaurantpage.ResponseRestaurantInfo;
+import com.mukeshproject.zomatoguide.sharedpreferences.PreferenceHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,9 +33,11 @@ import retrofit2.Response;
 
 public class ReviewsFragment extends Fragment implements LooperPreparedListener {
 
+    private static final String PREF_RES_ID_KEY = "PREF_RES_ID_KEY";
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final int res_id = 18737018;
+    private int res_id = 0;
     private final int phNumber = 0;
     private ImageView iv_back_reviewFrag, iv_call_reviewFrag;
     private TextView tv_restaurantNameTopBar, tv_restaurantName_reviewsFrag,
@@ -80,6 +84,8 @@ public class ReviewsFragment extends Fragment implements LooperPreparedListener 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getPrefData();
         initViews(view);
         fetchServer();
 
@@ -91,6 +97,10 @@ public class ReviewsFragment extends Fragment implements LooperPreparedListener 
 //                }
 //            });
 //        }
+    }
+
+    private void getPrefData() {
+        res_id = PreferenceHelper.getResIdFromPreference(getContext(), PREF_RES_ID_KEY);
     }
 
     private void initViews(View view) {
@@ -173,19 +183,19 @@ public class ReviewsFragment extends Fragment implements LooperPreparedListener 
         tv_restaurantNameTopBar.setText(responseRestaurantInfo.getName());
 
         tv_restaurantName_reviewsFrag.setText(responseRestaurantInfo.getName());
-        tv_quickBites_reviewsFrag.setText(responseRestaurantInfo.getCuisines());
+        tv_quickBites_reviewsFrag.setText("Quick Bites - " + responseRestaurantInfo.getCuisines());
         tv_locality_reviewsFrag.setText(responseRestaurantInfo.getLocation().getLocalityVerbose());
 
         if (responseRestaurantInfo.getIsDeliveringNow() == 0) {
             tv_timeStatus_reviewFrag.setText("Closed -");
-        } else {
-            tv_timeStatus_reviewFrag.setText("Open -");
+            tv_timeStatus_reviewFrag.setTextColor(ContextCompat.getColor(getContext(), R.color.cranberryRed));
         }
+
         tv_timimgs_reviewsFrag.setText(responseRestaurantInfo.getTimings());
         tv_costfor2_reviewsFrag.setText("Cost for two - ₹" + responseRestaurantInfo.getAverageCostForTwo() + " (approx.)");
         rating.setText(responseRestaurantInfo.getUserRating().getAggregateRating());
 
-        ratingCount.setText(responseRestaurantInfo.getAllReviewsCount() + "REVIEWS");
+        ratingCount.setText(responseRestaurantInfo.getAllReviewsCount() + " REVIEWS");
 
     }
 

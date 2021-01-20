@@ -1,6 +1,5 @@
 package com.mukeshproject.zomatoguide.adapter;
 
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +14,8 @@ import com.mukeshproject.zomatoguide.fragments.ReviewsFragment;
 
 public class FragmentAdapterRestaurantInfo extends FragmentStatePagerAdapter {
 
-    private final Bundle bundle;
-
-    public FragmentAdapterRestaurantInfo(@NonNull FragmentManager fm, int behavior, Bundle bundle) {
+    public FragmentAdapterRestaurantInfo(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
-        this.bundle = bundle;
     }
 
 
@@ -28,23 +24,15 @@ public class FragmentAdapterRestaurantInfo extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                OverviewFragment overviewFragment = new OverviewFragment();
-                overviewFragment.setArguments(bundle);
-                return overviewFragment;
+                return new OverviewFragment();
             case 1:
-                MenuFragment menuFragment = new MenuFragment();
-                menuFragment.setArguments(bundle);
-                return menuFragment;
+                return new MenuFragment();
             case 2:
-                PhotosFragment photosFragment = new PhotosFragment();
-                photosFragment.setArguments(bundle);
-                return photosFragment;
+                return new PhotosFragment();
             case 3:
-                ReviewsFragment reviewsFragment = new ReviewsFragment();
-                reviewsFragment.setArguments(bundle);
-                return reviewsFragment;
+                return new ReviewsFragment();
         }
-        return OverviewFragment.newInstance("This is Default Fragment", "");
+        return null;
     }
 
     @Override

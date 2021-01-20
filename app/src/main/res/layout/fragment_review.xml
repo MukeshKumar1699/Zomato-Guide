@@ -25,8 +25,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/dp_20"
             android:text="Restaurant Name"
-            android:textSize="@dimen/sp_20"
-            android:textStyle="bold" />
+            android:textSize="@dimen/sp_20" />
 
     </LinearLayout>
 
@@ -45,6 +44,7 @@
                 android:id="@+id/tv_restaurantName_reviewsFrag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:paddingStart="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_5"
                 android:paddingBottom="@dimen/dp_5"
@@ -79,8 +79,8 @@
                 android:paddingStart="@dimen/dp_10"
                 android:paddingTop="@dimen/dp_5"
                 android:paddingBottom="@dimen/dp_5"
-                android:text="Open"
-                android:textColor="@color/cranberryRed" />
+                android:text="Open now - "
+                android:textColor="@android:color/holo_blue_light" />
 
             <TextView
                 android:id="@+id/tv_timimgs_reviewsFrag"
@@ -127,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/line"
                 android:layout_margin="@dimen/dp_10"
+                android:textStyle="bold"
                 android:drawableLeft="@drawable/ic_stars_red"
                 android:drawableRight="@drawable/ic_stars_red"
                 android:drawablePadding="@dimen/dp_5"
@@ -138,6 +139,7 @@
                 android:id="@+id/rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_below="@id/review"
                 android:layout_margin="@dimen/dp_10"
                 android:text="Rating" />

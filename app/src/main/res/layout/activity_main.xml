@@ -12,6 +12,9 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_baseline_location_dark"
+        android:fontFamily="sans-serif"
+        android:textSize="@dimen/dp_20"
+        android:textStyle="bold"
         android:text="Location"
         android:textColor="@android:color/black" />
 

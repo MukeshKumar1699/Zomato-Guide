@@ -2,7 +2,6 @@ package com.mukeshproject.zomatoguide.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +21,7 @@ import com.mukeshproject.zomatoguide.api.Network;
 import com.mukeshproject.zomatoguide.listeners.LooperPreparedListener;
 import com.mukeshproject.zomatoguide.model.BackgroundThread;
 import com.mukeshproject.zomatoguide.restaurantpage.ResponseRestaurantInfo;
+import com.mukeshproject.zomatoguide.sharedpreferences.PreferenceHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +30,7 @@ import retrofit2.Response;
 
 public class OverviewFragment extends Fragment implements LooperPreparedListener {
 
+    private static final String PREF_RES_ID_KEY = "PREF_RES_ID_KEY";
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -77,8 +78,8 @@ public class OverviewFragment extends Fragment implements LooperPreparedListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getPrefData();
         initViews(view);
-        getBundleData();
 //        if(isLooperPrepared) {
 //            thread.addTaskToQueue(new Runnable() {
 //                @Override
@@ -90,18 +91,14 @@ public class OverviewFragment extends Fragment implements LooperPreparedListener
         fetchServer();
     }
 
-    private void getBundleData() {
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            res_id = bundle.getInt("res_id", 0);
-        }
-        Log.d("Mukesh res_Id", String.valueOf(res_id));
+    private void getPrefData() {
+        res_id = PreferenceHelper.getResIdFromPreference(getContext(), PREF_RES_ID_KEY);
     }
 
     private void fetchServer() {
 
         ApiClient apiClient = Network.getRetrofitInstance().create(ApiClient.class);
-        Call<ResponseRestaurantInfo> call = apiClient.getRestaurantPageInfo(18737018, "f372e6f364b53f71036e6f5662ecfa99");
+        Call<ResponseRestaurantInfo> call = apiClient.getRestaurantPageInfo(res_id, "f372e6f364b53f71036e6f5662ecfa99");
 
         call.enqueue(new Callback<ResponseRestaurantInfo>() {
             @Override
