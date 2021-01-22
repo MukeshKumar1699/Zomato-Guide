@@ -1,9 +1,12 @@
 package com.mukeshproject.zomatoguide.activities;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,15 +64,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         client = LocationServices.getFusedLocationProviderClient(this);
 
         initViewsandListeners();
-        getPrefData();
-
-        fetchServer();
+        if (getLocationData()) {
+            fetchServer();
+            PreferenceHelper.writeLatitudeToPreference(MainActivity.this, PREF_LATITUDE_KEY, 0);
+            PreferenceHelper.writeLongitudeToPreference(MainActivity.this, PREF_LONGITUDE_KEY, 0);
+        } else {
+            getCityData();
+        }
         setViewPagerAdapter();
-        upDateUI();
+
     }
 
     private void upDateUI() {
-
+        q = PreferenceHelper.getCityNameFromPreference(MainActivity.this, PREF_CITY_NAME_KEY);
         btn_location.setText(q);
     }
 
@@ -83,13 +90,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout = findViewById(R.id.tabLayoutMainActivity);
     }
 
-    private void getPrefData() {
+    void getCityData() {
+        q = PreferenceHelper.getCityNameFromPreference(MainActivity.this, PREF_CITY_NAME_KEY);
+        entity_id = PreferenceHelper.getEntityIdFromPreference(MainActivity.this, PREF_ENTITY_ID_KEY);
+        upDateUI();
+    }
+
+    private boolean getLocationData() {
 
         latitude = PreferenceHelper.getLatitudeFromPreference(MainActivity.this, PREF_LATITUDE_KEY);
         longitude = PreferenceHelper.getLongitudeFromPreference(MainActivity.this, PREF_LONGITUDE_KEY);
-        q = PreferenceHelper.getCityNameFromPreference(MainActivity.this, PREF_CITY_NAME_KEY);
-        entity_id = PreferenceHelper.getEntityIdFromPreference(MainActivity.this, PREF_ENTITY_ID_KEY);
 
+        return latitude != 0 && longitude != 0;
     }
 
     private void fetchServer() {
@@ -107,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 q = responseListofLocations.getLocationSuggestions().get(0).getName();
                 PreferenceHelper.writeCityNameToPreference(MainActivity.this, PREF_CITY_NAME_KEY, q);
+                upDateUI();
 
             }
 
@@ -169,31 +182,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tv_gps.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         boolean isPermissionGranted = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
                         if (!isPermissionGranted) {
                             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQ_CODE);
                         } else {
+                            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-                            client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                                @Override
-                                public void onSuccess(Location location) {
+                                client.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                                    @Override
+                                    public void onSuccess(Location location) {
 
-                                    if (location != null) {
 
-                                        latitude = location.getLatitude();
-                                        longitude = location.getLongitude();
+                                        if (location != null) {
 
-                                        PreferenceHelper.writeLatitudeToPreference(MainActivity.this, PREF_LATITUDE_KEY, latitude);
-                                        PreferenceHelper.writeLongitudeToPreference(MainActivity.this, PREF_LONGITUDE_KEY, longitude);
-                                        finish();
+                                            latitude = location.getLatitude();
+                                            longitude = location.getLongitude();
+
+                                            PreferenceHelper.writeLatitudeToPreference(MainActivity.this, PREF_LATITUDE_KEY, latitude);
+                                            PreferenceHelper.writeLongitudeToPreference(MainActivity.this, PREF_LONGITUDE_KEY, longitude);
+                                            finish();
+                                        }
                                     }
-                                }
 
-                            });
+                                });
+                            } else {
+                                showGPSDisabledAlertToUser();
+                            }
                         }
                     }
                 });
         }
     }
 
+    private void showGPSDisabledAlertToUser() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage("For a better experience, turn on device location, which uses Google's location service. Go to Settings > Location")
+                .setCancelable(false)
+                .setPositiveButton("Enable",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent callGPSSettingIntent = new Intent(
+                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                                startActivity(callGPSSettingIntent);
+                            }
+                        });
+        alertDialogBuilder.setNegativeButton("cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = alertDialogBuilder.create();
+        alert.show();
+    }
 }

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mukeshproject.zomatoguide.CustomComparator;
 import com.mukeshproject.zomatoguide.R;
 import com.mukeshproject.zomatoguide.activities.RestaurantInfoActivity;
 import com.mukeshproject.zomatoguide.adapter.ListOfRestaurants_Rc_Adapter;
@@ -27,6 +28,8 @@ import com.mukeshproject.zomatoguide.listofrestaurants.Restaurant;
 import com.mukeshproject.zomatoguide.sharedpreferences.PreferenceHelper;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +53,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener, Ite
     private int entity_id = 0;
     private ApiClient apiClient;
     private ResponseListOfRestaurants responseListOfRestaurants;
+    private ListOfRestaurants_Rc_Adapter listOfRestaurants_rc_adapter;
     private TextView filterAscending, filterDescending, rating3, rating4, tv_displayCity;
     private RecyclerView rc_listRestaurants;
 
@@ -156,7 +160,7 @@ public class OrderFragment extends Fragment implements View.OnClickListener, Ite
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rc_listRestaurants.setLayoutManager(linearLayoutManager);
 
-        ListOfRestaurants_Rc_Adapter listOfRestaurants_rc_adapter = new ListOfRestaurants_Rc_Adapter(responseListOfRestaurants.getRestaurants(), this);
+        listOfRestaurants_rc_adapter = new ListOfRestaurants_Rc_Adapter(responseListOfRestaurants.getRestaurants(), this);
         rc_listRestaurants.setAdapter(listOfRestaurants_rc_adapter);
     }
 
@@ -164,18 +168,22 @@ public class OrderFragment extends Fragment implements View.OnClickListener, Ite
     @Override
     public void onClick(View v) {
         int id = v.getId();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rc_listRestaurants.setLayoutManager(linearLayoutManager);
 
+        listOfRestaurants_rc_adapter = new ListOfRestaurants_Rc_Adapter(responseListOfRestaurants.getRestaurants(), this);
         switch (id) {
 
             case R.id.filterAscending:
 
+                Collections.sort(responseListOfRestaurants.getRestaurants(), new CustomComparator());
                 break;
 
             case R.id.filterDescending:
+                Collections.reverse(responseListOfRestaurants.getRestaurants());
                 break;
 
             case R.id.rating3_0:
-
                 break;
 
             case R.id.rating4_0:

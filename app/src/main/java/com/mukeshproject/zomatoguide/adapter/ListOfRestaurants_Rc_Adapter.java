@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ListOfRestaurants_Rc_Adapter extends RecyclerView.Adapter<ListOfRestaurants_Rc_ViewHolder> {
 
-    private final List<RestaurantsItem> restaurantsItemList;
+    private List<RestaurantsItem> restaurantsItemList;
     private final ItemClickListenerSearchRestaurant itemClickListenerSearchRestaurant;
 
     public ListOfRestaurants_Rc_Adapter(List<RestaurantsItem> restaurantsItems, ItemClickListenerSearchRestaurant itemClickListenerSearchRestaurant) {
@@ -36,6 +36,11 @@ public class ListOfRestaurants_Rc_Adapter extends RecyclerView.Adapter<ListOfRes
 
         RestaurantsItem restaurantsItems = restaurantsItemList.get(position);
         holder.setData(restaurantsItems);
+    }
+
+    public void updateData(List<RestaurantsItem> restaurantsItems) {
+        this.restaurantsItemList = restaurantsItems;
+        notifyDataSetChanged();
     }
 
     @Override
