@@ -1,7 +1,8 @@
 ## Table of contents
-*[Geleral info](#general-info)
-*[Technologies](#technologies)
-*[Launch](#setup)
+*[Geleral info](#General-info)
+*[Technologies](#Technologies)
+*[Launch](#Launch)
+*[Setup](#Setup)
 
 ## General info
 This project is to clone some fo the features of the Zomato the android application.
