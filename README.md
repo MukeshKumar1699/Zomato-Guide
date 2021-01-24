@@ -1,7 +1,7 @@
 ## Table of contents
 *[Geleral info](#General-info)
 *[Technologies](#Technologies)
-*[Launch](#Launch)
+*[Hardware and Permissions Requirements](#Hardware and Permissions Requirements)
 *[Setup](#Setup)
 
 ## General info
