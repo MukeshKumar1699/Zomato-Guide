@@ -1,12 +1,12 @@
-##Table of contents
+## Table of contents
 *[Geleral info](#general-info)
 *[Technologies](#technologies)
 *[Launch](#setup)
 
-##General info
+## General info
 This project is to clone some fo the features of the Zomato the android application.
 
-##Technologies
+## Technologies
 Project is created with:
 * Android
 * FireBase
@@ -14,7 +14,7 @@ Project is created with:
 * Retrofit
 * Glide
   
-##Launch
+## Launch
 * Minimum Android Os of 5.1 is Required.
 * A minimum of 50mb space is required.
 * Internet Access is Mandatory.
