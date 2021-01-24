@@ -1,7 +1,7 @@
 ## Table of contents
 *[Geleral info](#General-info)
 *[Technologies](#Technologies)
-*[Hardware and Permissions Requirements](#HardwareandPermissionsRequirements)
+*[Requirements](#Requirements)
 *[Setup](#Setup)
 
 ## General info
@@ -15,7 +15,7 @@ Project is created with:
 * Retrofit
 * Glide
   
-## Hardware and Permissions Requirements
+## Requirements
 * Minimum Android Os of 5.1 is Required.
 * A minimum of 50mb space is required.
 * Internet Access is Mandatory.
