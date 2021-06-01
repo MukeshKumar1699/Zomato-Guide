@@ -118,9 +118,11 @@ public class OverviewFragment extends Fragment implements LooperPreparedListener
 
     private void setData(ResponseRestaurantInfo responseRestaurantInfo) {
 
-        Glide.with(getContext()).
-                load(responseRestaurantInfo.getFeaturedImage()).
-                into(iv_restaurantImage_restinfo);
+        if(responseRestaurantInfo.getFeaturedImage().length() != 0) {
+            Glide.with(getContext()).
+                    load(responseRestaurantInfo.getFeaturedImage()).
+                    into(iv_restaurantImage_restinfo);
+        }
 
         tv_rating_restinfo.setText(responseRestaurantInfo.getUserRating().getAggregateRating() + "/5"
                 + "\n" + responseRestaurantInfo.getAllReviewsCount() + "REVIEWS");

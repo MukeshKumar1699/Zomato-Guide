@@ -9,6 +9,7 @@
         android:id="@+id/iv_restaurantImage_restinfo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_250"
+        android:src="@drawable/imagenotavailable"
         android:scaleType="fitXY" />
 
     <ImageView

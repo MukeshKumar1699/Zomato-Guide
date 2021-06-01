@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "11338530561",
+    "firebase_url": "https://zomato-guide-default-rtdb.firebaseio.com",
     "project_id": "zomato-guide",
     "storage_bucket": "zomato-guide.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "11338530561-bm1ahrjq9qgj4olb8rnpb84ccqurfnhf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mukeshproject.zomatoguide",
+            "certificate_hash": "8153f2ab3b27a147496879f39a45ab94a4be5f81"
+          }
+        },
         {
           "client_id": "11338530561-5j46sav45aptsluhp8euf8e3oevkf9m2.apps.googleusercontent.com",
           "client_type": 3

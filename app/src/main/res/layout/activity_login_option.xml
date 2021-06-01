@@ -38,7 +38,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sendOTP"
+        android:id="@+id/btn_sendOTP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/ll"
@@ -55,7 +55,7 @@
         android:id="@+id/or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sendOTP"
+        android:layout_below="@id/btn_sendOTP"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/dp_5"
 
@@ -92,6 +92,7 @@
             android:layout_marginTop="@dimen/dp_10"
             android:layout_marginEnd="@dimen/dp_10"
             android:layout_weight="1"
+            android:fontFamily=""
             android:background="@drawable/phone_background"
             android:drawableLeft="@drawable/ic_facebook"
             android:padding="@dimen/dp_5"

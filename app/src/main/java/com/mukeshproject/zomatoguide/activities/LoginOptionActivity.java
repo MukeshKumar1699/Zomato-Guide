@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +35,8 @@ public class LoginOptionActivity extends AppCompatActivity implements View.OnCli
     private EditText et_phone;
     private String ccp, phone;
     private GoogleSignInClient mGoogleSignInClient;
+
+    
 
     @Override
     protected void onStart() {
@@ -115,7 +118,7 @@ public class LoginOptionActivity extends AppCompatActivity implements View.OnCli
         Ccp = findViewById(R.id.ccp);
         et_phone = findViewById(R.id.et_phone);
 
-        sendOTP = findViewById(R.id.sendOTP);
+        sendOTP = findViewById(R.id.btn_sendOTP);
         cntEmail = findViewById(R.id.cntEmail);
         cntFacebook = findViewById(R.id.cntFacebook);
         cntGoogle = findViewById(R.id.cntGoogle);
@@ -134,7 +137,7 @@ public class LoginOptionActivity extends AppCompatActivity implements View.OnCli
 
         switch (id) {
 
-            case R.id.sendOTP:
+            case R.id.btn_sendOTP:
                 sendOTP.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -142,16 +145,18 @@ public class LoginOptionActivity extends AppCompatActivity implements View.OnCli
                         ccp = Ccp.getFullNumberWithPlus();
                         phone = et_phone.getText().toString();
 
-                        if (phone.length() == 10) {
-                            Intent intent = new Intent(LoginOptionActivity.this, VerifyOTPActivity.class);
-                            intent.putExtra("number_code", ccp);
-                            intent.putExtra("phone_number", phone);
-                            startActivity(intent);
-                        } else if (phone.equals(null)) {
-                            et_phone.setError("This Field cannot be Empty");
-                        } else if (phone.length() < 10 || et_phone.length() > 10) {
-                            et_phone.setError("Number Invalid");
-                        }
+//                        if (phone.length() == 10) {
+//                            Intent intent = new Intent(LoginOptionActivity.this, VerifyOTPActivity.class);
+//                            intent.putExtra("number_code", ccp);
+//                            intent.putExtra("phone_number", phone);
+//                            startActivity(intent);
+//                        } else if (phone.equals(null)) {
+//                            et_phone.setError("This Field cannot be Empty");
+//                        } else if (phone.length() < 10 || et_phone.length() > 10) {
+//                            et_phone.setError("Number Invalid");
+//                        }
+
+                        Snackbar.make(v,"Currently This Feature is Stopped", Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;
@@ -170,7 +175,7 @@ public class LoginOptionActivity extends AppCompatActivity implements View.OnCli
                 cntFacebook.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Snackbar.make(v,"Currently This Feature is Stopped", Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 break;

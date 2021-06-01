@@ -37,4 +37,10 @@
 
         <item name="android:background">@drawable/button_black</item>
     </style>
+
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/ic_round_star_green</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:maxHeight">48dip</item>
+    </style>
 </resources>

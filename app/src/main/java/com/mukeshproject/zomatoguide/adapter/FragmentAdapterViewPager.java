@@ -4,17 +4,17 @@ package com.mukeshproject.zomatoguide.adapter;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.mukeshproject.zomatoguide.fragments.FragmentViewPager1;
 import com.mukeshproject.zomatoguide.fragments.FragmentViewPager2;
 import com.mukeshproject.zomatoguide.fragments.FragmentViewPager3;
 
-public class FragmentAdapterViewPager extends FragmentPagerAdapter {
+public class FragmentAdapterViewPager extends FragmentStatePagerAdapter {
 
 
-    public FragmentAdapterViewPager(@NonNull FragmentManager fm, int behavior) {
-        super(fm, behavior);
+    public FragmentAdapterViewPager(@NonNull FragmentManager fm) {
+        super(fm);
     }
 
     @NonNull
@@ -22,14 +22,11 @@ public class FragmentAdapterViewPager extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                FragmentViewPager1 fragmentViewPager1 = new FragmentViewPager1();
-                return fragmentViewPager1;
+                return new FragmentViewPager1();
             case 1:
-                FragmentViewPager2 fragmentViewPager2 = new FragmentViewPager2();
-                return fragmentViewPager2;
+                return new FragmentViewPager2();
             case 2:
-                FragmentViewPager3 fragmentViewPager3 = new FragmentViewPager3();
-                return fragmentViewPager3;
+                return new FragmentViewPager3();
         }
         return FragmentViewPager1.newInstance("This is First Fragment", "");
     }

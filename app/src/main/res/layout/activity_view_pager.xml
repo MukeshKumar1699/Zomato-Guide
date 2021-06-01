@@ -18,6 +18,7 @@
 
     <com.cuberto.liquid_swipe.LiquidPager
         android:id="@+id/liquidPager"
+        app:button_drawable="@drawable/ic_arrow_forward"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

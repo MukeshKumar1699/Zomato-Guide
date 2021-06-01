@@ -18,6 +18,8 @@
     <string name="cnfmpasswd">Confirm Password</string>
     <string name="logout">Logout</string>
     <string name="otp">Enter OTP</string>
-
+    <string name="skip">Skip</string>
+    <string name="getStarted">Get Started</string>
+    <string name="instant_validation">(instant validation)</string>
 
 </resources>

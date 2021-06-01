@@ -39,95 +39,19 @@
             android:layout_margin="@dimen/dp_5"
             android:background="@android:color/darker_gray" />
 
-        <LinearLayout
-            android:id="@+id/starTotal"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            style="?android:attr/ratingBarStyleIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/line"
-            android:layout_margin="@dimen/dp_10"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/starImage1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_round_star_green" />
-
-            <ImageView
-                android:id="@+id/starImage2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_round_star_green" />
-
-            <ImageView
-                android:id="@+id/starImage3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_round_star_green" />
-
-            <ImageView
-                android:id="@+id/starImage4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_round_star_green" />
-
-            <ImageView
-                android:id="@+id/starImage5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_round_star_green" />
-
-            <ImageView
-                android:id="@+id/emptyStarImage1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_empty_star" />
-
-            <ImageView
-                android:id="@+id/emptyStarImage2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_empty_star" />
-
-            <ImageView
-                android:id="@+id/emptyStarImage3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_empty_star" />
-
-            <ImageView
-                android:id="@+id/emptyStarImage4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/line"
-                android:src="@drawable/ic_empty_star" />
-
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tv_userRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/line"
-            android:layout_marginStart="@dimen/dp_5"
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_toEndOf="@id/starTotal"
-            android:text="user Rating" />
+            android:layout_below="@id/line"/>
 
         <TextView
             android:id="@+id/tv_userComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_userRating"
+            android:layout_below="@id/ratingBar"
             android:layout_margin="@dimen/dp_10"
             android:text="user Comment" />
 
@@ -145,6 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_userComment"
             android:layout_margin="@dimen/dp_10"
+            android:textAlignment="center"
             android:layout_toStartOf="@id/tv_comment"
             android:drawableRight="@drawable/ic_like" />
 
@@ -153,6 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_userComment"
+            android:textAlignment="center"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/dp_10"
             android:drawableRight="@drawable/ic_comment" />

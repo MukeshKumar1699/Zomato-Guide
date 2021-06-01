@@ -39,9 +39,11 @@ public class ListOfRestaurants_Rc_ViewHolder extends RecyclerView.ViewHolder {
 
     public void setData(RestaurantsItem restaurantsItemList) {
 
-        Glide.with(iv_restaurantImage.getContext()).
-                load(restaurantsItemList.getRestaurant().getFeaturedImage()).
-                into(iv_restaurantImage);
+        if ((restaurantsItemList.getRestaurant().getFeaturedImage()).length() != 0) {
+            Glide.with(iv_restaurantImage.getContext()).
+                    load(restaurantsItemList.getRestaurant().getFeaturedImage()).
+                    into(iv_restaurantImage);
+        }
 
         tv_restaurantRating.setText(restaurantsItemList.getRestaurant().getUserRating().getAggregateRating() + "/5");
         tv_restaurantName.setText(restaurantsItemList.getRestaurant().getName());

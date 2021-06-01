@@ -104,6 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return latitude != 0 && longitude != 0;
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private void fetchServer() {
         ApiClient apiClient = Network.getRetrofitInstance().create(ApiClient.class);
         Call<ResponseListofLocations> call = apiClient.getLocations("", latitude, longitude, "f372e6f364b53f71036e6f5662ecfa99");
