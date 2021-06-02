@@ -28,11 +28,11 @@ Project is created with:
 * If It is not installing check with hardware requirements and check if Install from Unknown Resources is enabled
 
 ##ScreenShots
-![SplashScreen](https://Screenshots/SplashScreen.png)
-![How We Work 1](https://Screenshots/how1.png)
-![How We Work 2](https://Screenshots/how2.png)
-![How We Work 3](https://Screenshots/how3.png)
-![Login](https://Screenshots/login.png)
-![Home](https://Screenshots/home.png)
-![RestaurantInfo](https://Screenshots/restaurantInfo.png)
-![RestaurantReview](https://Screenshots/restaurantReview.png)
+![SplashScreen](SplashScreen.png)
+![How We Work 1](how1.png)
+![How We Work 2](how2.png)
+![How We Work 3](how3.png)
+![Login](login.png)
+![Home](home.png)
+![RestaurantInfo](restaurantInfo.png)
+![RestaurantReview](restaurantReview.png)
